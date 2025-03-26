@@ -33,5 +33,5 @@ runs:
       if: runner.os == 'Windows'
       working-directory: ${{ runner.temp }}
     - name: Print kaitai-struct-compiler version
-      run: kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin/kaitai-struct-compiler --version
+      run: kaitai-struct-compiler --version
       shell: bash
