@@ -1,6 +1,10 @@
 name: "Kaitai Struct compiler"
 description: "Run Kaitai Struct compiler"
 inputs:
+  kaitai-version:
+    description: "Version of Kaitai Struct compiler to use"
+    required: true
+    default: "0.10"
   args:
     description: "Arguments to pass to kaitai-struct-compiler"
     required: true
@@ -8,11 +12,11 @@ runs:
   using: "composite"
   steps:
     - name: Download kaitai-struct-compiler
-      run: wget https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/0.10/kaitai-struct-compiler-0.10.zip
+      run: wget https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/${{ inputs.kaitai-version }}/kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
       shell: bash
     - name: Unzip kaitai-struct-compiler
-      run: unzip kaitai-struct-compiler-0.10.zip
+      run: unzip kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
       shell: bash
     - name: Run kaitai-struct-compiler
-      run: kaitai-struct-compiler-0.10/bin/kaitai-struct-compiler ${{ inputs.args }}
+      run: kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin/kaitai-struct-compiler ${{ inputs.args }}
       shell: bash
