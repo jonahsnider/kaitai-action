@@ -12,10 +12,10 @@ runs:
   using: "composite"
   steps:
     - name: Download kaitai-struct-compiler
-      run: wget https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/${{ inputs.kaitai-version }}/kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
+      run: wget --quiet https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/${{ inputs.kaitai-version }}/kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
       shell: bash
     - name: Unzip kaitai-struct-compiler
-      run: unzip kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
+      run: unzip -qq kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
       shell: bash
     - name: Run kaitai-struct-compiler
       run: kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin/kaitai-struct-compiler ${{ inputs.args }}
