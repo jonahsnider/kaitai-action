@@ -1,13 +1,10 @@
-name: "Kaitai Struct compiler"
-description: "Run Kaitai Struct compiler"
+name: "Setup Kaitai Struct compiler"
+description: "Install kaitai-struct-compiler and make it available for use in GitHub Actions"
 inputs:
   kaitai-version:
     description: "Version of Kaitai Struct compiler to use"
     required: true
     default: "0.10"
-  args:
-    description: "Arguments to pass to kaitai-struct-compiler"
-    required: true
 runs:
   using: "composite"
   steps:
@@ -17,6 +14,16 @@ runs:
     - name: Unzip kaitai-struct-compiler
       run: unzip -qq kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
       shell: bash
-    - name: Run kaitai-struct-compiler
-      run: kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin/kaitai-struct-compiler ${{ inputs.args }}
+    - name: Set PATH for Unix
+      shell: bash
+      run: |
+        echo "$PWD/kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin" >> "$GITHUB_PATH"
+      if: runner.os != 'Windows'
+    - name: Set PATH for Windows
+      shell: pwsh
+      run: |
+        echo "$Pwd\kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin" >> $Env:GITHUB_PATH
+      if: runner.os == 'Windows'
+    - name: Print kaitai-struct-compiler version
+      run: kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin/kaitai-struct-compiler --version
       shell: bash
