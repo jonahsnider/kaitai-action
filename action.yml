@@ -1,5 +1,9 @@
 name: "Setup Kaitai Struct compiler"
 description: "Install kaitai-struct-compiler and make it available for use in GitHub Actions"
+author: Jonah Snider
+branding:
+  icon: save
+  color: red
 inputs:
   kaitai-version:
     description: "Version of Kaitai Struct compiler to use"
