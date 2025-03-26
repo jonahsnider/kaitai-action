@@ -15,19 +15,23 @@ runs:
     - name: Download kaitai-struct-compiler
       run: wget --quiet https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/${{ inputs.kaitai-version }}/kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
       shell: bash
+      working-directory: ${{ runner.temp }}
     - name: Unzip kaitai-struct-compiler
       run: unzip -qq kaitai-struct-compiler-${{ inputs.kaitai-version }}.zip
       shell: bash
+      working-directory: ${{ runner.temp }}
     - name: Set PATH for Unix
       shell: bash
       run: |
         echo "$PWD/kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin" >> "$GITHUB_PATH"
       if: runner.os != 'Windows'
+      working-directory: ${{ runner.temp }}
     - name: Set PATH for Windows
       shell: pwsh
       run: |
         echo "$Pwd\kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin" >> $Env:GITHUB_PATH
       if: runner.os == 'Windows'
+      working-directory: ${{ runner.temp }}
     - name: Print kaitai-struct-compiler version
       run: kaitai-struct-compiler-${{ inputs.kaitai-version }}/bin/kaitai-struct-compiler --version
       shell: bash
