@@ -19,7 +19,7 @@ jobs:
       - name: Checkout Git repository
         uses: actions/checkout@v4
       - name: Setup Kaitai Struct compiler
-        uses: jonahsnider/kaitai-action@v1
+        uses: jonahsnider/kaitai-action@v1.0.1
       - name: Run kaitai-struct-compiler
         run: kaitai-struct-compiler --version
 ```
